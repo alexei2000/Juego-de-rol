@@ -9,46 +9,61 @@ public class Wizard extends Character{
     private String[] spells;
 
     public Wizard(){
+
         super();
         this.spells = new String[4];
-        for(int i=0;i<this.spells.length;i++){
+
+        for(int i=0 ; i<this.spells.length ; i++){
             this.spells[i]=" ";
         }
     }
 
     public Wizard(String name, String type, int damage, int intelligence, int hpm){
+
         super(name, type, damage, intelligence, hpm);
         this.spells = new String[4];
+
         for(int i=0;i<this.spells.length;i++){
-            this.spells[i]=" ";
+            this.spells[i] = " ";
         }
     }
 
     //setter methods abstract
     @Override
     public void setDamage(){
-        int dmRandom = (int)Math.floor(Math.random()*16);
+
+        int dmRandom = (int) Math.floor(Math.random() * 16);
+
         this.damage = dmRandom;
+        System.out.println("Se ha selcionado como Daño: " + this.damage + " pts");
     }
 
     @Override
     public void setDamage(int dm){
+
         if(dm>=0 && dm<=15){
             this.damage = dm;
         }
-        else{
+        else if(dm>15){
             this.damage = 15;
+        }
+        else if(dm<0){
+            this.damage = 0;
         }
     }
 
     @Override
     public void setIntelligence(){
-        int itgRandom = 17 + (int)Math.floor(Math.random()*4);
+
+        int itgRandom = 17 + (int) Math.floor(Math.random() * 4);
+
         this.intelligence = itgRandom;
+        System.out.println("Se ha selecionado como Inteligencia: " + this.intelligence + " pts");
     }
 
     @Override
     public void setIntelligence(int itg){
+
         if(itg>=17 && itg<=20){
             this.intelligence = itg;
         }
@@ -70,8 +85,8 @@ public class Wizard extends Character{
                     "\nType: "+this.type+
                     "\nDamage: "+this.damage+" pts"+
                     "\nIntelligence: "+this.intelligence+" pts"+
-                    "\nHealt Max: "+this.healthPointsMax+" pts"+
-                    "\nCurrent Healt: "+this.healthPoints+" pts";
+                    "\nHealth Max: "+this.healthPointsMax+" pts"+
+                    "\nCurrent Health: "+this.healthPoints+" pts";
 
         String dataSpells="\nSpells: ";
 
@@ -89,33 +104,36 @@ public class Wizard extends Character{
 
     public void learnSpell(String spell){
 
-        if(this.spells.length<4){
-            for(int i=0;i<4;i++){
-                if(this.spells[i]==" "){
-                    this.spells[i]=spell;
-                    break;
-                }
+        boolean band = false;
+
+        for(int i=0 ; i<this.spells.length && !band ; i++){
+            if(this.spells[i]==" "){
+                this.spells[i] = spell;
+                band = true;
             }
         }
-        else{
+
+        if(!band){
             JOptionPane.showMessageDialog(null,"No puede aprender mas hechizos","Alert",0);
         }
 
 
     }
 
-    public void splashSpell(Character ch){
+    public void spellSplash(Character ch){
 
-        boolean band=false;
+        boolean band = false;
         ch.setHealthPoints(ch.getHealthPoints()-10);
-        for(int i=0; i<4 && !band; i++){
+
+        for(int i=0; i<this.spells.length && !band; i++){
             if(this.spells[i]==" "){
-                this.spells[i-1]=" ";
-                band=true;
+                this.spells[i-1] = " ";
+                band = true;
             }
         }
+
         if(!band){
-            this.spells[3]=" ";
+            this.spells[3] = " ";
         }
     }
 

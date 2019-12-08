@@ -11,7 +11,7 @@ public class Cleric extends Character{
     //constructors
     public Cleric(){
         super();
-        this.god="odin";
+        setGod();
     }
     public Cleric(String name, String type, int damage, int intelligence, int hpm, String god){
         super(name, type, damage, intelligence, hpm);
@@ -23,22 +23,29 @@ public class Cleric extends Character{
     public void setDamage(){
         int dmRandom = 18 + (int)Math.floor(Math.random()*3);
         this.damage = dmRandom;
+        System.out.println("Se ha selcionado como Daño: "+this.damage+" pts");
     }
 
     @Override
     public void setDamage(int dm){
+
         if(dm>=18 && dm<=20){
             this.damage = dm;
         }
-        else{
-            setDamage();
+        else if(dm>20){
+            this.damage = 20;
         }
+        else if(dm<18){
+            this.damage = 18;
+        }
+
     }
 
     @Override
     public void setIntelligence(){
         int itgRandom = 12 + (int)Math.floor(Math.random()*5);
         this.intelligence = itgRandom;
+        System.out.println("Se ha selecionado como Inteligencia: "+this.intelligence+" pts");
     }
 
     @Override
@@ -47,8 +54,17 @@ public class Cleric extends Character{
             this.intelligence = itg;
         }
         else{
-            setIntelligence();
+            if(itg<16){
+                this.intelligence = 16;
+            }
+            else if(itg>12){
+                this.intelligence = 12;
+            }
         }
+    }
+
+    public void setGod(){
+        this.god="Dorime";
     }
 
     public void setGod(String god){
@@ -78,10 +94,10 @@ public class Cleric extends Character{
 
     public void heal(Character ch){
 
-        ch.setHealthPoints(ch.getHealthPoints()-10);
+        ch.setHealthPoints(ch.getHealthPoints()+10);
 
-        if(ch.getHealthPoints()>ch.getHealthPointsMax()){
-            ch.setHealthPoints(ch.getHealthPoints());
+        if(ch.getHealthPoints() > ch.getHealthPointsMax()){
+            ch.setHealthPoints(ch.getHealthPointsMax());
         }
 
     }

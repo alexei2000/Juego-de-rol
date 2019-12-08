@@ -3,7 +3,7 @@ package models.character;
 import javax.swing.JOptionPane;
 
 
-abstract public class Character {
+public abstract class Character {
     protected String name;
     protected String type;
     protected int damage;
@@ -47,6 +47,7 @@ abstract public class Character {
             case 3: this.type = "Elf"; break;
             case 4: this.type = "Dwarf"; break;
         }
+        System.out.println("Se ha seleccionado "+this.type+" como raza");
     }
 
     public void setType(String tp){
@@ -58,12 +59,13 @@ abstract public class Character {
         }
         else{
             this.setType();
-            System.out.println("no se ha seleccionado una raza valida, se ha seleccionado " + this.getType() + " por defecto");
+            System.out.println("no se ha seleccionado una raza valida");
         }
     }
 
     public void setName(){
         this.name = this.type+System.currentTimeMillis();
+        System.out.println("Se ha selecionado el nombre de: "+this.name);
     }
 
     public void setName(String nm){
@@ -71,22 +73,23 @@ abstract public class Character {
     }
 
     public void setHealthPointsMax(){
-        int hpmax = (int)Math.floor(Math.random()*101);
+        int hpmax = (int) Math.floor(Math.random() * 101);
         this.healthPointsMax = hpmax;
         setHealthPoints(hpmax);
+        System.out.println("Se ha seleccionado como vida maxima: " + this.healthPointsMax + " pts");
     }
 
     public void setHealthPointsMax(int hpmax){
         if(hpmax>=0 && hpmax<=100){
-            this.healthPointsMax=hpmax;
+            this.healthPointsMax = hpmax;
             setHealthPoints(hpmax);
         }
         else{
             if(hpmax<0){
-                this.healthPointsMax=0;
+                this.healthPointsMax = 0;
             }
             else if(hpmax>100){
-                this.healthPointsMax=100;
+                this.healthPointsMax = 100;
             }
         }
     }
