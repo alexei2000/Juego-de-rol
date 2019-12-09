@@ -47,7 +47,6 @@ public abstract class Character {
             case 3: this.type = "Elf"; break;
             case 4: this.type = "Dwarf"; break;
         }
-        System.out.println("Se ha seleccionado "+this.type+" como raza");
     }
 
     public void setType(String tp){
@@ -59,13 +58,11 @@ public abstract class Character {
         }
         else{
             this.setType();
-            System.out.println("no se ha seleccionado una raza valida");
         }
     }
 
     public void setName(){
         this.name = this.type+System.currentTimeMillis();
-        System.out.println("Se ha selecionado el nombre de: "+this.name);
     }
 
     public void setName(String nm){
@@ -76,7 +73,6 @@ public abstract class Character {
         int hpmax = (int) Math.floor(Math.random() * 101);
         this.healthPointsMax = hpmax;
         setHealthPoints(hpmax);
-        System.out.println("Se ha seleccionado como vida maxima: " + this.healthPointsMax + " pts");
     }
 
     public void setHealthPointsMax(int hpmax){

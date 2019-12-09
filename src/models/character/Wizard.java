@@ -35,7 +35,6 @@ public class Wizard extends Character{
         int dmRandom = (int) Math.floor(Math.random() * 16);
 
         this.damage = dmRandom;
-        System.out.println("Se ha selcionado como Daño: " + this.damage + " pts");
     }
 
     @Override
@@ -58,7 +57,6 @@ public class Wizard extends Character{
         int itgRandom = 17 + (int) Math.floor(Math.random() * 4);
 
         this.intelligence = itgRandom;
-        System.out.println("Se ha selecionado como Inteligencia: " + this.intelligence + " pts");
     }
 
     @Override
@@ -116,6 +114,9 @@ public class Wizard extends Character{
         if(!band){
             JOptionPane.showMessageDialog(null,"No puede aprender mas hechizos","Alert",0);
         }
+        else{
+            JOptionPane.showMessageDialog(null,this.name+" ha aprendido "+spell,"Ataque de "+"Hechizo aprendido",1);
+        }
 
 
     }
@@ -123,17 +124,30 @@ public class Wizard extends Character{
     public void spellSplash(Character ch){
 
         boolean band = false;
-        ch.setHealthPoints(ch.getHealthPoints()-10);
+        String spell="";
 
-        for(int i=0; i<this.spells.length && !band; i++){
-            if(this.spells[i]==" "){
-                this.spells[i-1] = " ";
-                band = true;
-            }
+        if(this.spells[0]==" "){
+            JOptionPane.showMessageDialog(null,this.name+" no conoce ningun hechizo","Alert",0);
         }
+        else{
+            ch.setHealthPoints(ch.getHealthPoints()-10);
 
-        if(!band){
-            this.spells[3] = " ";
+            for(int i=1; i<this.spells.length && !band; i++){
+                if(this.spells[i]==" "){
+                    spell = this.spells[i-1];
+                    this.spells[i-1] = " ";
+                    band = true;
+                }
+            }
+
+            if(!band){
+                spell = this.spells[3];
+                this.spells[3] = " ";
+            }
+
+            String message = this.name + " ha lanzado su hechizo " + spell + " contra " + ch.getName();
+            JOptionPane.showMessageDialog(null, message,"Ataque de "+this.name,1);
+
         }
     }
 

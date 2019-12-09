@@ -23,7 +23,6 @@ public class Cleric extends Character{
     public void setDamage(){
         int dmRandom = 18 + (int)Math.floor(Math.random()*3);
         this.damage = dmRandom;
-        System.out.println("Se ha selcionado como Daño: "+this.damage+" pts");
     }
 
     @Override
@@ -45,7 +44,6 @@ public class Cleric extends Character{
     public void setIntelligence(){
         int itgRandom = 12 + (int)Math.floor(Math.random()*5);
         this.intelligence = itgRandom;
-        System.out.println("Se ha selecionado como Inteligencia: "+this.intelligence+" pts");
     }
 
     @Override
@@ -98,6 +96,13 @@ public class Cleric extends Character{
 
         if(ch.getHealthPoints() > ch.getHealthPointsMax()){
             ch.setHealthPoints(ch.getHealthPointsMax());
+        }
+
+        if(this.getName().equals(ch.getName())){
+            JOptionPane.showMessageDialog(null,this.name+" se ha curado a si mismo","Curacion",1,Cleric.sprite);
+        }
+        else{
+            JOptionPane.showMessageDialog(null,this.name+" Ha curado a "+ch.getName(),"Curacion",1,Cleric.sprite);
         }
 
     }
